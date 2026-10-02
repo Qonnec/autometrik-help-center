@@ -1,0 +1,3 @@
+# What is Purchase Workflow?
+
+A purchase workflow is **a straightforward process for managing the procurement of goods or services in a business**. It starts by identifying the need for an item due to low stock or operational requirements. A purchase requisition is then created to detail what is needed and why, which is reviewed and approved by an authorized person. Next, a supplier is chosen based on cost and quality, and a purchase order is sent to them with the terms. After the goods or services are delivered, they are checked and accepted if they meet expectations. The supplier’s invoice is verified and approved for payment, and finally, the transaction is recorded to update inventory and financial records.

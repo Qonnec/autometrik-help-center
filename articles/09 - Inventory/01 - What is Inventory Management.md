@@ -1,0 +1,3 @@
+# What is Inventory Management?
+
+Inventory Management in the AutoMetrik system is the **process of tracking and managing your auto shop’s stock, such as parts, accessories, and supplies, to ensure everything runs smoothly.** This feature allows you to add new items like oil filters or brake pads by entering details such as name, code, quantity, and cost, while also updating stock levels as items are sold or restocked. It helps you monitor current quantities, flag low or out-of-stock items, and assign products to specific branches or storage areas if you operate multiple locations. Additionally, you can record transactions to track usage or sales and link items to supplier information for easy reordering.

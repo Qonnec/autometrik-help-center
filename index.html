@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autometrik Help Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<style>
+:root{
+  --teal:#0490d6; --teal-deep:#0374ad; --on-teal:#ffffff; --green:#6dcf37; --green-deep:#5bb82a; --on-green:#14300a;
+  --ink:#24302f; --muted:#6b7877; --line:#e1e8e7; --panel:#f2f5f5;
+  --bg:#ffffff; --surface:#ffffff; --foot:#f2f4f4; --mark:#fff3b0;
+  --deco:rgba(0,45,90,.24); --shadow:0 0 0 6px rgba(255,255,255,.18);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --teal:#2ea3e3; --teal-deep:#0477b3; --on-teal:#ffffff; --green:#7bd84a; --green-deep:#6dcf37; --on-green:#14300a;
+    --ink:#e3ecea; --muted:#9aaaa8; --line:#2a3938; --panel:#182423;
+    --bg:#101918; --surface:#101918; --foot:#0c1413; --mark:#5b5117;
+    --deco:rgba(0,20,45,.35); --shadow:0 0 0 6px rgba(255,255,255,.08);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --teal:#2ea3e3; --teal-deep:#0477b3; --on-teal:#ffffff; --green:#7bd84a; --green-deep:#6dcf37; --on-green:#14300a;
+  --ink:#e3ecea; --muted:#9aaaa8; --line:#2a3938; --panel:#182423;
+  --bg:#101918; --surface:#101918; --foot:#0c1413; --mark:#5b5117;
+  --deco:rgba(0,20,45,.35); --shadow:0 0 0 6px rgba(255,255,255,.08);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 Roboto,"Segoe UI",Helvetica,Arial,sans-serif;min-height:100%;display:flex;flex-direction:column}
+a{color:var(--teal)}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:max(16px,3vw);width:100%}
+
+/* header + hero */
+.hero{background:var(--teal);color:var(--on-teal);position:relative;overflow:hidden}
+.hero.compact .hero-body{padding-block:30px 34px}
+.hero.compact h1{display:none}
+.brandbar{background:#ffffff}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px 28px;padding-block:18px;flex-wrap:wrap}
+.brand{display:block;line-height:0}
+.brand img{height:44px;width:auto}
+nav.main{display:flex;gap:28px;flex-wrap:wrap}
+nav.main a{color:#21252f;text-decoration:none;font-weight:500;font-size:15px}
+nav.main a:hover{color:#0490d6;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#6dcf37;text-decoration-thickness:2px}
+.stripe{height:6px;background:linear-gradient(90deg,#0490d6 0 34%,#6dcf37 34% 100%)}
+.hero-body{position:relative;z-index:2;text-align:center;padding-block:52px 64px}
+.hero h1{font-size:26px;font-weight:500;margin:0 0 20px;text-wrap:balance}
+.search{position:relative;max-width:600px;margin:0 auto}
+.search input{width:100%;height:58px;border:0;border-radius:30px;padding:0 22px 0 52px;font:inherit;font-size:16px;color:#24302f;background:#fff;box-shadow:var(--shadow)}
+.search input::placeholder{color:#9aa5a4}
+.search input:focus{outline:none;box-shadow:0 0 0 5px var(--green)}
+.search .mag{position:absolute;left:20px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:#3d4847}
+.suggest{position:absolute;left:0;right:0;top:66px;background:var(--surface);color:var(--ink);border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.18);text-align:left;overflow:hidden;z-index:5}
+.suggest button{display:block;width:100%;text-align:left;border:0;background:none;padding:10px 18px;cursor:pointer;color:var(--ink);border-bottom:1px solid var(--line)}
+.suggest button:last-child{border-bottom:0}
+.suggest button:hover,.suggest button.on{background:var(--panel)}
+.suggest small{display:block;color:var(--muted);font-size:12px}
+.deco{position:absolute;inset:0;z-index:1;pointer-events:none;color:var(--deco)}
+.deco svg{position:absolute;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* main layout */
+main{flex:1}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 268px;gap:30px;padding-block:60px 70px;align-items:start}
+@media (max-width:820px){.layout{grid-template-columns:1fr;padding-block:36px 50px}}
+.sec-title{font-size:22px;font-weight:500;margin:0;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.topics{display:grid;grid-template-columns:1fr 1fr;column-gap:30px;margin-top:22px}
+@media (max-width:600px){.topics{grid-template-columns:1fr}}
+.topic{display:flex;gap:22px;padding:22px 0 24px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+.topic .ic{flex:0 0 38px;color:var(--green)}
+.topic .ic svg{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.topic h3{margin:0 0 6px;font-size:18px;font-weight:500;line-height:1.3}
+.topic p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.55}
+.topic .count{display:inline-block;margin-top:8px;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--teal)}
+.topic:hover h3{color:var(--teal)}
+
+aside{display:grid;gap:20px}
+.box{background:var(--panel);border-radius:4px;padding:26px 28px}
+.box h4{margin:0 0 14px;font-size:15px;font-weight:700}
+.box ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.box li a{color:var(--ink);text-decoration:none;font-size:13.5px;line-height:1.4;display:block}
+.box li a:hover{color:var(--teal)}
+.box li a.cur{color:var(--teal);font-weight:500}
+.box p{margin:0 0 16px;font-size:13.5px;line-height:1.5}
+.btn{display:inline-block;background:var(--green);color:var(--on-green);border:0;border-radius:24px;padding:11px 18px;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--green-deep)}
+
+/* list / article views */
+.crumbs{font-size:13px;color:var(--muted);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px}
+.crumbs a{color:var(--muted);text-decoration:none}
+.crumbs a:hover{color:var(--teal)}
+.list{list-style:none;margin:10px 0 0;padding:0}
+.list li{border-bottom:1px solid var(--line)}
+.list a{display:flex;gap:14px;align-items:flex-start;padding:14px 2px;text-decoration:none;color:var(--ink)}
+.list a svg{flex:0 0 18px;width:18px;height:18px;margin-top:3px;fill:none;stroke:var(--muted);stroke-width:1.6}
+.list a:hover{color:var(--teal)}
+.list small{display:block;color:var(--muted);font-size:13px;margin-top:3px}
+.list mark{background:var(--mark);color:inherit;border-radius:2px}
+.empty{color:var(--muted);padding:20px 0}
+
+.article h1{font-size:30px;font-weight:500;line-height:1.25;margin:0 0 6px;text-wrap:balance}
+.article .meta{color:var(--muted);font-size:13px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.prose{max-width:68ch;overflow-wrap:anywhere}
+.prose h2{font-size:21px;font-weight:500;margin:32px 0 10px}
+.prose h3{font-size:17px;font-weight:500;margin:24px 0 8px}
+.prose p,.prose li{line-height:1.7}
+.prose ul,.prose ol{padding-left:1.4em}
+.prose li{margin:4px 0}
+.prose li p{margin:0}
+.prose img{display:block;border:1px solid var(--line);border-radius:4px;margin:18px 0 6px;background:#fff}
+.prose .tbl{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:4px}
+.prose table{border-collapse:collapse;width:100%;font-size:14px}
+.prose th,.prose td{border-bottom:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+.prose th{background:var(--panel);font-weight:500}
+.prose tr:last-child td{border-bottom:0}
+.prose blockquote{margin:16px 0;padding:12px 16px;background:var(--panel);border-radius:4px}
+.prose code{background:var(--panel);padding:1px 5px;border-radius:3px;font-size:.92em}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+.pager a{text-decoration:none;color:var(--ink);font-size:14px;line-height:1.4}
+.pager a small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.pager a:hover{color:var(--teal)}
+.pager .next{text-align:right;grid-column:2}
+
+footer{background:var(--foot);color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:30px}
+footer nav{display:flex;gap:20px;flex-wrap:wrap}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--teal)}
+@media (max-width:600px){nav.main{gap:18px}.brand img{height:36px}.hero-body{padding-block:32px 44px}}
+@media (prefers-reduced-motion:no-preference){.topic h3,.list a,.btn{transition:color .15s,background .15s}}
+</style>
+</head>
+<body>
+
+<div class="brandbar"><div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="#home" aria-label="Autometrik Help Center home"><img src="images/logo.png" alt="Autometrik" width="277" height="56"></a>
+    <nav class="main" aria-label="Main">
+      <a href="#home">Help Topics</a>
+      <a href="#c-3">Getting Started</a>
+      <a href="#c-2">Business Guide</a>
+      <a href="#c-17">Troubleshooting</a>
+    </nav>
+  </div>
+</div></div>
+<div class="stripe" aria-hidden="true"></div>
+<header class="hero" id="hero">
+  <div class="deco" aria-hidden="true">
+    <!-- wrench -->
+    <svg style="left:5%;top:34%;width:70px;height:70px" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.3 5.3L3 18l3 3 6.4-6.4a4 4 0 0 0 5.3-5.3l-2.5 2.5-2.3-.7-.7-2.3z"/></svg>
+    <!-- tire -->
+    <svg style="right:4%;top:58%;width:74px;height:74px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/><path d="M12 3v5M12 16v5M3 12h5M16 12h5"/></svg>
+    <!-- gauge -->
+    <svg style="left:34%;top:22%;width:64px;height:64px" viewBox="0 0 24 24"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-5"/><path d="M6 13l1 .5M18 13l-1 .5M12 8v1"/></svg>
+    <!-- clipboard -->
+    <svg style="right:21%;top:34%;width:70px;height:78px" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="1.5"/><path d="M9 4V3h6v1M8.5 10l1.5 1.5 2.5-3M14 10h2M8.5 15l1.5 1.5 2.5-3M14 15h2"/></svg>
+    <!-- car -->
+    <svg style="left:16%;top:66%;width:92px;height:70px" viewBox="0 0 24 24"><path d="M3 15v-3l2-5h14l2 5v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M5 12h14"/><circle cx="7.5" cy="16.5" r="1.5"/><circle cx="16.5" cy="16.5" r="1.5"/></svg>
+  </div>
+  <div class="hero-body">
+    <div class="wrap">
+      <h1>How can we help?</h1>
+      <form class="search" id="searchForm" role="search" autocomplete="off">
+        <svg class="mag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+        <input id="q" type="search" placeholder="Search the Knowledge Base" aria-label="Search the Knowledge Base">
+        <div class="suggest" id="suggest" hidden></div>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main><div class="wrap"><div class="layout">
+  <section id="view" aria-live="polite"></section>
+  <aside id="side"></aside>
+</div></div></main>
+
+<footer><div class="wrap">
+  <span>© Autometrik Auto Repair &amp; Tire Shop Software</span>
+  <nav aria-label="Footer"><a href="#home">Help Topics</a><a href="#c-3">Getting Started</a><a href="#c-17">Troubleshooting</a></nav>
+</div></footer>
+
+<script>
+const DESC = {
+  "Introduction":"What Autometrik is, who it's for, its key features and system requirements.",
+  "Business Process and System Flow Guide":"How a vehicle, a part and a peso move through the system, end to end.",
+  "Getting Started":"Log in, find your way around the dashboard and menus.",
+  "Onboarding Workflows":"Import your existing data and configure branches and print settings.",
+  "Vehicles":"Add vehicles, link them to customers and view service history.",
+  "Customers":"Manage customer records, payment history and SMS messages.",
+  "Products and Services":"Set up products, pricing, serialized items and service options.",
+  "Operations":"Estimates, job orders, the job board, packages, sales and billing.",
+  "Inventory":"Stock adjustments, transfers, purchasing, receiving and valuation.",
+  "Product Inquiries":"Search products, check availability and view product details.",
+  "Customer Relationship Management":"SMS campaigns and service reminders that bring customers back.",
+  "People":"Employees, payroll groups, holidays, leave, loans and overtime.",
+  "Accounting":"Chart of accounts, cash, checks, journal entries and financial statements.",
+  "Reports":"Sales, job, mechanic, purchase, customer and supplier reports.",
+  "Administration":"Service categories, templates, pricing tiers, numbering and more.",
+  "Hands-On Training Guide":"Practice scenarios for training new staff on real shop situations.",
+  "Troubleshooting":"Fixes for common problems such as login issues."
+};
+const P = 'd="', E = '"';
+const ICON = {
+  "Introduction":'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+  "Business Process and System Flow Guide":'<rect x="3" y="4" width="6" height="5" rx="1"/><rect x="15" y="4" width="6" height="5" rx="1"/><rect x="9" y="15" width="6" height="5" rx="1"/><path d="M9 6.5h6M18 9v3H6V9M12 12v3"/>',
+  "Getting Started":'<path d="M14 4c3-1 6-1 6-1s0 3-1 6l-6 6-5-5z"/><path d="M8 10H5l-2 3 4 1M14 16v3l-3 2-1-4"/><circle cx="15.5" cy="8.5" r="1.3"/><path d="M6 17c-1 1-2 4-2 4s3-1 4-2"/>',
+  "Onboarding Workflows":'<path d="M12 3v11M8 10l4 4 4-4"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/>',
+  "Vehicles":'<path d="M3 15v-3l2-5h14l2 5v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M5 12h14"/><circle cx="7.5" cy="16.5" r="1.5"/><circle cx="16.5" cy="16.5" r="1.5"/>',
+  "Customers":'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.5-4 3-6 6.5-6s6 2 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14c3 0 4.5 2 5 5"/>',
+  "Products and Services":'<path d="M3 8l9-5 9 5-9 5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/>',
+  "Operations":'<path d="M14.7 6.3a4 4 0 0 0-5.3 5.3L3 18l3 3 6.4-6.4a4 4 0 0 0 5.3-5.3l-2.5 2.5-2.3-.7-.7-2.3z"/>',
+  "Inventory":'<rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><path d="M13 17h8M17 13v8"/>',
+  "Product Inquiries":'<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M8 10.5h5M10.5 8v5"/>',
+  "Customer Relationship Management":'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>',
+  "People":'<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7.5 18c.7-2.4 2.4-3.5 4.5-3.5s3.8 1.1 4.5 3.5"/>',
+  "Accounting":'<rect x="5" y="2.5" width="14" height="19" rx="1.5"/><rect x="8" y="5.5" width="8" height="3.5"/><path d="M8.5 12.5h.5M12 12.5h.5M15.5 12.5h.5M8.5 15.5h.5M12 15.5h.5M15.5 15.5h.5M8.5 18.5h.5M12 18.5h.5M15.5 18.5h.5"/>',
+  "Reports":'<path d="M4 20V4M4 20h16"/><rect x="7" y="12" width="3" height="5"/><rect x="12" y="8" width="3" height="9"/><rect x="17" y="5" width="3" height="12"/>',
+  "Administration":'<circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M21.5 12h-3M5.5 12h-3M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1M18.7 18.7l-2.1-2.1M7.4 7.4 5.3 5.3"/>',
+  "Hands-On Training Guide":'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c2 2 10 2 12 0v-5M22 9v6"/>',
+  "Troubleshooting":'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/>'
+};
+const POPULAR = ["How to Log In and Out","How to Create a Job Order","How Estimate to Job Order Works","How to Generate an Invoice","How to Import Existing Data of Customers","How to Fix Login Issues"];
+const DOC_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg>';
+
+let CATS = [], FLAT = [];
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const plain = md => md.replace(/!\[[^\]]*\]\([^)]*\)/g,'').replace(/<[^>]+>/g,' ').replace(/[#*_`>|\\-]+/g,' ').replace(/\s+/g,' ').trim();
+const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[name]||ICON["Introduction"]}</svg>`;
+const aHref = a => `#a-${a.ci+1}-${a.ai+1}`;
+
+function sideDefault(){
+  const pop = POPULAR.map(t => FLAT.find(a => a.t === t)).filter(Boolean);
+  return `<div class="box"><h4>Popular Articles</h4><ul>${pop.map(a=>`<li><a href="${aHref(a)}">${esc(a.t)}</a></li>`).join('')}</ul></div>` + supportBox();
+}
+function supportBox(){
+  return `<div class="box"><h4>Need Support?</h4><p>Can't find the answer you're looking for? Try the troubleshooting guide or walk through a training scenario.</p><a class="btn" href="#c-17">Troubleshooting</a></div>`;
+}
+
+function renderHome(){
+  $('#hero').classList.remove('compact');
+  $('#view').innerHTML = `<h2 class="sec-title">Help Topics</h2><div class="topics">${CATS.map((c,i)=>`
+    <a class="topic" href="#c-${i+1}"><div class="ic">${icon(c.name)}</div><div><h3>${esc(c.name)}</h3><p>${esc(DESC[c.name]||'')}</p><span class="count">${c.arts.length} article${c.arts.length>1?'s':''}</span></div></a>`).join('')}</div>`;
+  $('#side').innerHTML = sideDefault();
+}
+
+function renderCat(ci){
+  const c = CATS[ci]; if(!c) return renderHome();
+  $('#hero').classList.add('compact');
+  $('#view').innerHTML = `<div class="crumbs"><a href="#home">Help Topics</a><span>›</span><span>${esc(c.name)}</span></div>
+    <h2 class="sec-title">${esc(c.name)}</h2>
+    <ul class="list">${c.arts.map((a,ai)=>`<li><a href="#a-${ci+1}-${ai+1}">${DOC_ICON}<span>${esc(a.t)}</span></a></li>`).join('')}</ul>`;
+  $('#side').innerHTML = `<div class="box"><h4>All Topics</h4><ul>${CATS.map((x,i)=>`<li><a href="#c-${i+1}"${i===ci?' class="cur"':''}>${esc(x.name)}</a></li>`).join('')}</ul></div>` + supportBox();
+}
+
+function renderArticle(ci, ai){
+  const c = CATS[ci], a = c && c.arts[ai]; if(!a) return renderHome();
+  $('#hero').classList.add('compact');
+  let html = DOMPurify.sanitize(marked.parse(a.md, {gfm:true}));
+  const prev = c.arts[ai-1], next = c.arts[ai+1];
+  $('#view').innerHTML = `<article class="article">
+    <div class="crumbs"><a href="#home">Help Topics</a><span>›</span><a href="#c-${ci+1}">${esc(c.name)}</a></div>
+    <h1>${esc(a.t)}</h1><div class="meta">${esc(c.name)} · Article ${ai+1} of ${c.arts.length}</div>
+    <div class="prose">${html}</div>
+    <div class="pager">${prev?`<a href="#a-${ci+1}-${ai}"><small>← Previous</small>${esc(prev.t)}</a>`:''}${next?`<a class="next" href="#a-${ci+1}-${ai+2}"><small>Next →</small>${esc(next.t)}</a>`:''}</div>
+  </article>`;
+  $('#view').querySelectorAll('.prose table').forEach(t => { const w = document.createElement('div'); w.className='tbl'; t.replaceWith(w); w.appendChild(t); });
+  $('#view').querySelectorAll('.prose a[href^="http"]').forEach(l => { l.target='_blank'; l.rel='noopener'; });
+  $('#side').innerHTML = `<div class="box"><h4>In ${esc(c.name)}</h4><ul>${c.arts.map((x,i)=>`<li><a href="#a-${ci+1}-${i+1}"${i===ai?' class="cur"':''}>${esc(x.t)}</a></li>`).join('')}</ul></div>` + supportBox();
+}
+
+function search(q){
+  const terms = q.toLowerCase().split(/\s+/).filter(t => t.length > 1);
+  if(!terms.length) return [];
+  return FLAT.map(a => {
+    const t = a.t.toLowerCase(); let s = 0;
+    for(const w of terms){
+      if(t.includes(w)) s += 10;
+      const n = a.low.split(w).length - 1;
+      if(n) s += Math.min(n, 8); else if(!t.includes(w)) return null;
+    }
+    return {a, s};
+  }).filter(Boolean).sort((x,y) => y.s - x.s).map(r => r.a);
+}
+function snippet(a, q){
+  const w = q.toLowerCase().split(/\s+/).filter(t=>t.length>1);
+  const i = Math.max(0, ...w.map(x => a.low.indexOf(x)).filter(i=>i>=0).slice(0,1));
+  let s = a.text.slice(Math.max(0,i-60), i+140);
+  s = esc((i>60?'…':'') + s + '…');
+  for(const x of w) s = s.replace(new RegExp('('+x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>');
+  return s;
+}
+function renderResults(q){
+  $('#hero').classList.add('compact');
+  const r = search(q);
+  $('#view').innerHTML = `<div class="crumbs"><a href="#home">Help Topics</a><span>›</span><span>Search</span></div>
+    <h2 class="sec-title">${r.length} result${r.length===1?'':'s'} for “${esc(q)}”</h2>
+    ${r.length ? `<ul class="list">${r.slice(0,50).map(a=>`<li><a href="${aHref(a)}">${DOC_ICON}<span>${esc(a.t)}<small>${esc(a.cat)} — ${snippet(a,q)}</small></span></a></li>`).join('')}</ul>`
+      : `<p class="empty">No articles match that search. Try fewer or different words, such as “job order” or “invoice”.</p>`}`;
+  $('#side').innerHTML = sideDefault();
+}
+
+function route(){
+  $('#suggest').hidden = true;
+  const h = location.hash.slice(1); let m;
+  if((m = h.match(/^a-(\d+)-(\d+)$/))) renderArticle(+m[1]-1, +m[2]-1);
+  else if((m = h.match(/^c-(\d+)$/))) renderCat(+m[1]-1);
+  else renderHome();
+  if(h && h !== 'home') window.scrollTo({top:0});
+}
+
+/* live suggestions */
+let sel = -1;
+$('#q').addEventListener('input', e => {
+  const q = e.target.value.trim(), box = $('#suggest'); sel = -1;
+  if(q.length < 2){ box.hidden = true; return; }
+  const r = search(q).slice(0,6);
+  box.innerHTML = r.length ? r.map(a=>`<button type="button" data-h="${aHref(a)}">${esc(a.t)}<small>${esc(a.cat)}</small></button>`).join('')
+    : `<button type="button" disabled>No matching articles</button>`;
+  box.hidden = false;
+});
+$('#q').addEventListener('keydown', e => {
+  const b = [...$('#suggest').querySelectorAll('button[data-h]')];
+  if($('#suggest').hidden || !b.length) return;
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); sel = (sel + (e.key==='ArrowDown'?1:-1) + b.length) % b.length; b.forEach((x,i)=>x.classList.toggle('on',i===sel)); }
+  if(e.key==='Enter' && sel>=0){ e.preventDefault(); location.hash = b[sel].dataset.h; }
+  if(e.key==='Escape') $('#suggest').hidden = true;
+});
+$('#suggest').addEventListener('click', e => { const b = e.target.closest('button[data-h]'); if(b){ location.hash = b.dataset.h; } });
+document.addEventListener('click', e => { if(!e.target.closest('.search')) $('#suggest').hidden = true; });
+$('#searchForm').addEventListener('submit', e => {
+  e.preventDefault(); const q = $('#q').value.trim(); if(!q) return;
+  $('#suggest').hidden = true; renderResults(q); window.scrollTo({top:0});
+});
+window.addEventListener('hashchange', route);
+
+fetch('articles.json').then(r => r.json()).then(data => {
+  CATS = data;
+  CATS.forEach((c,ci) => c.arts.forEach((a,ai) => { a.ci=ci; a.ai=ai; a.cat=c.name; a.text=plain(a.md); a.low=(a.t+' '+a.text).toLowerCase(); FLAT.push(a); }));
+  route();
+}).catch(() => { $('#view').innerHTML = '<p class="empty">The articles could not be loaded. Reload the page to try again.</p>'; });
+</script>
+</body>
+</html>

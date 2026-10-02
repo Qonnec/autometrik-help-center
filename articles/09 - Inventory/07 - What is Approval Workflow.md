@@ -1,0 +1,3 @@
+# What is Approval Workflow
+
+This is **a step-by-step process where requests, like purchase orders or stock adjustments, are reviewed and approved by specific people before moving forward**. It involves submitting a request, sending it to approvers, and getting their okay or rejection based on set rules. Its importance lies in keeping things accountable and controlled, preventing unauthorized actions, and reducing mistakes with multiple checks. It also creates a clear record of decisions, makes the approval process faster, and ensures resources are used properly, protecting the business’s finances and operations.
