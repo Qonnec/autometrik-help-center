@@ -114,7 +114,7 @@ aside{display:grid;gap:20px}
 .prose ul,.prose ol{padding-left:1.4em}
 .prose li{margin:4px 0}
 .prose li p{margin:0}
-.prose img{display:block;border:1px solid var(--line);border-radius:4px;margin:18px 0 6px;background:#fff}
+.prose img{display:block;max-width:100%;max-height:min(70vh,680px);width:auto;height:auto;object-fit:contain;border:1px solid var(--line);border-radius:4px;margin:18px 0 6px;background:#fff;cursor:zoom-in}
 .prose .tbl{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:4px}
 .prose table{border-collapse:collapse;width:100%;font-size:14px}
 .prose th,.prose td{border-bottom:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
@@ -272,6 +272,16 @@ function renderArticle(ci, ai){
     <div class="pager">${prev?`<a href="#a-${ci+1}-${ai}"><small>← Previous</small>${esc(prev.t)}</a>`:''}${next?`<a class="next" href="#a-${ci+1}-${ai+2}"><small>Next →</small>${esc(next.t)}</a>`:''}</div>
   </article>`;
   $('#view').querySelectorAll('.prose table').forEach(t => { const w = document.createElement('div'); w.className='tbl'; t.replaceWith(w); w.appendChild(t); });
+  $('#view').querySelectorAll('.prose img').forEach(img => {
+    const link = document.createElement('a');
+    link.href = img.getAttribute('src');
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.title = 'Open full-size image';
+    link.setAttribute('aria-label', `Open full-size image: ${img.alt || 'article image'}`);
+    img.replaceWith(link);
+    link.appendChild(img);
+  });
   $('#view').querySelectorAll('.prose a[href^="http"]').forEach(l => { l.target='_blank'; l.rel='noopener'; });
   $('#side').innerHTML = `<div class="box"><h4>In ${esc(c.name)}</h4><ul>${c.arts.map((x,i)=>`<li><a href="#a-${ci+1}-${i+1}"${i===ai?' class="cur"':''}>${esc(x.t)}</a></li>`).join('')}</ul></div>` + supportBox();
 }
