@@ -1,17 +1,25 @@
-# Autometrik Documentation
+<div align="center">
+  <img src="images/logo.png" alt="Autometrik logo" width="420">
+</div>
 
-Autometrik is an all-in-one management system for auto repair shops, garages, and workshops, tailored to the Philippine auto service and parts industry. It brings customer and vehicle records, estimates and job orders, inventory and purchasing, billing and payments, and business reporting into connected shop workflows.
+# Autometrik Help Center
 
-**This repository contains the Autometrik Help Center documentation, not the Autometrik application.** It publishes guides for setup, daily operations, accounting, reports, training, and troubleshooting.
+**Documentation for the Autometrik auto repair shop management system.**
 
-## Add or edit an article
+Autometrik helps Philippine auto repair shops, tire shops, and service centers manage work from customer booking through job completion and payment. It connects customer and vehicle records, estimates, job orders, inventory and purchasing, billing, and reporting in one system. Learn more on the [Autometrik Facebook page](https://www.facebook.com/autometrik.ph/).
 
-1. In `articles/`, choose the numbered topic folder. Create a new `.md` file with the next numbered filename, for example `articles/03 - Getting Started/04 - Resetting a Password.md`.
-2. Start the file with a level-one heading, such as `# Resetting a Password`. The heading becomes the article title. Put the body below it.
-3. Put any images in `articles/images/` and reference them from the article as `![Description](../images/filename.png)`.
-4. Edit `articles/README.md` to include a link if you want the repository's Markdown index updated. The website's topics and search are generated from the folders automatically.
+This repository publishes the Autometrik Help Center. It contains product guides, business process explanations, onboarding instructions, training scenarios, and troubleshooting articles. The Autometrik application itself is maintained separately.
 
-The numbered folder and filename control the displayed order. Do not rename existing categories or reorder existing articles casually: current article URLs contain their numeric positions (`#a-category-article`).
+## Browse the documentation
 
+The website groups articles by topic and provides search. Start with [Introduction](articles/01%20-%20Introduction/), [Getting Started](articles/03%20-%20Getting%20Started/), or the [full article index](articles/README.md).
 
-For review before publication, protect `main` and have contributors open pull requests. After a pull request is merged, the workflow publishes the changed article. Organization policies must allow GitHub Actions and Pages publishing.
+## Add or update an article
+
+1. Open the relevant numbered topic folder in `articles/`. Create a numbered `.md` file, such as `articles/03 - Getting Started/04 - Resetting a Password.md`.
+2. Start the file with a level-one heading (`# Resetting a Password`). The heading becomes the article title on the website.
+3. Put article images in `articles/images/` and link them as `![Description](../images/filename.png)`.
+4. Optionally add the article to `articles/README.md` so it appears in the repository's Markdown index. The website's topic lists and search are generated automatically from article files.
+5. Open a pull request for review. After it is merged into `main`, GitHub Actions rebuilds and publishes the Help Center.
+
+Numbered folders and filenames set the article order. Existing website links use those positions, so avoid renumbering published articles unless you also plan to update links to them.
