@@ -14,6 +14,6 @@ Use the following procedure to **generate a cash transaction report.**
 
   - Set the "**To**" date.
 
-4**. Review the selected date range** to ensure accuracy.
+4. **Review the selected date range** to ensure accuracy.
 
 5\. Click the "**Generate Report**" button to create the report.
