@@ -239,3 +239,9 @@
 ## Troubleshooting
 
 - [How to Fix Login Issues](17%20-%20Troubleshooting/01%20-%20How%20to%20Fix%20Login%20Issues.md)
+
+## Forms & Downloads
+
+- [Service Request Form](18%20-%20Forms%20%26%20Downloads/01%20-%20Service%20Request%20Form.md)
+- [Change Request Form](18%20-%20Forms%20%26%20Downloads/02%20-%20Change%20Request%20Form.md)
+- [Quotation Form](18%20-%20Forms%20%26%20Downloads/03%20-%20Quotation%20Form.md)
