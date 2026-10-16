@@ -34,6 +34,7 @@ jobs:
           cp index.html articles.json _site/
           cp -R images _site/
           cp -R articles/images _site/articles/
+          cp -R forms _site/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
