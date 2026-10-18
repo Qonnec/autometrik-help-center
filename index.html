@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Autometrik Help Center</title>
+<script>try{if(localStorage.getItem('am-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
@@ -11,19 +12,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
 <style>
 :root{
+  color-scheme:light;
   --teal:#0490d6; --teal-deep:#0374ad; --on-teal:#ffffff; --green:#6dcf37; --green-deep:#5bb82a; --on-green:#14300a;
   --ink:#24302f; --muted:#6b7877; --line:#e1e8e7; --panel:#f2f5f5;
   --bg:#ffffff; --surface:#ffffff; --foot:#f2f4f4; --mark:#fff3b0;
   --deco:rgba(0,45,90,.24); --shadow:0 0 0 6px rgba(255,255,255,.18);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --teal:#2ea3e3; --teal-deep:#0477b3; --on-teal:#ffffff; --green:#7bd84a; --green-deep:#6dcf37; --on-green:#14300a;
-    --ink:#e3ecea; --muted:#9aaaa8; --line:#2a3938; --panel:#182423;
-    --bg:#101918; --surface:#101918; --foot:#0c1413; --mark:#5b5117;
-    --deco:rgba(0,20,45,.35); --shadow:0 0 0 6px rgba(255,255,255,.08);
-  }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
@@ -52,6 +45,13 @@ nav.main a{color:#21252f;text-decoration:none;font-weight:500;font-size:15px}
 nav.main a:hover{color:#0490d6;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#6dcf37;text-decoration-thickness:2px}
 .nav-toggle{display:none;align-items:center;gap:9px;border:1px solid #d6dddd;border-radius:6px;background:#fff;color:#21252f;padding:8px 11px;font-weight:500;cursor:pointer}
 .nav-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.theme-toggle{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid #d6dddd;border-radius:6px;background:#fff;color:#21252f;padding:0;cursor:pointer}
+.theme-toggle:hover{color:#0490d6;border-color:#0490d6}
+.theme-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle .sun{display:none}
+:root[data-theme="dark"] .theme-toggle .sun{display:block}
+:root[data-theme="dark"] .theme-toggle .moon{display:none}
+@media (min-width:701px){nav.main{margin-left:auto}}
 .stripe{height:6px;background:linear-gradient(90deg,#0490d6 0 34%,#6dcf37 34% 100%)}
 .hero-body{position:relative;z-index:2;text-align:center;padding-block:52px 64px}
 .hero h1{font-size:26px;font-weight:500;margin:0 0 20px;text-wrap:balance}
@@ -157,10 +157,12 @@ footer nav{display:flex;gap:20px;flex-wrap:wrap}
 footer a{color:var(--muted);text-decoration:none}
 footer a:hover{color:var(--teal)}
 @media (max-width:700px){
-  .topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0;padding-block:12px}
+  .topbar{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:0 8px;padding-block:12px}
+  .theme-toggle{grid-column:2;grid-row:1}
+  .nav-toggle{grid-column:3;grid-row:1}
   .brand img{height:36px;max-width:100%}
   .nav-toggle{display:flex}
-  nav.main{grid-column:1/-1;display:grid;gap:0;padding:12px 0 4px}
+  nav.main{grid-column:1/-1;grid-row:2;display:grid;gap:0;padding:12px 0 4px}
   nav.main:not(.open){display:none}
   nav.main a{padding:10px 4px;border-top:1px solid #e1e8e7}
 }
@@ -181,6 +183,10 @@ footer a:hover{color:var(--teal)}
       <a href="#c-17">Troubleshooting</a>
       <a href="#c-18">Forms &amp; Downloads</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+    </button>
   </div>
 </div></div>
 <div class="stripe" aria-hidden="true"></div>
@@ -275,6 +281,24 @@ $('#navToggle').addEventListener('click', () => {
 $('#mainNav').addEventListener('click', e => { if(e.target.closest('a')) closeMenu(); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
 window.matchMedia('(min-width:701px)').addEventListener('change', e => { if(e.matches) closeMenu(); });
+
+/* light / dark theme (light is the default) */
+function syncThemeButton(){
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const label = dark ? 'Switch to light mode' : 'Switch to dark mode';
+  const b = $('#themeToggle');
+  b.setAttribute('aria-pressed', String(dark));
+  b.setAttribute('aria-label', label);
+  b.title = label;
+}
+$('#themeToggle').addEventListener('click', () => {
+  const dark = document.documentElement.getAttribute('data-theme') !== 'dark';
+  if(dark) document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.removeAttribute('data-theme');
+  try { localStorage.setItem('am-theme', dark ? 'dark' : 'light'); } catch(e) {}
+  syncThemeButton();
+});
+syncThemeButton();
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const plain = md => md.replace(/!\[[^\]]*\]\([^)]*\)/g,'').replace(/<[^>]+>/g,' ').replace(/[#*_`>|\\-]+/g,' ').replace(/\s+/g,' ').trim();
 const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[name]||ICON["Introduction"]}</svg>`;
