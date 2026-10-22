@@ -1,0 +1,302 @@
+[
+  {
+    "date": "2026-01-03",
+    "type": "Enhancement",
+    "module": "Sales",
+    "change": "Deposit refunds now record the refund payment method and reference."
+  },
+  {
+    "date": "2026-01-03",
+    "type": "Enhancement",
+    "module": "Security",
+    "change": "New Cancel permissions for Invoices, Expenses, Job Orders, Payments, Purchase Orders and Supplier Payments."
+  },
+  {
+    "date": "2026-01-12",
+    "type": "Bug Fix",
+    "module": "Promotions",
+    "change": "Promotion type and value no longer reset on edit; end date must be after start date."
+  },
+  {
+    "date": "2026-01-15",
+    "type": "Enhancement",
+    "module": "Inventory",
+    "change": "Edit a product transaction; Stock Allocation view updated."
+  },
+  {
+    "date": "2026-01-23",
+    "type": "New Feature",
+    "module": "Setup",
+    "change": "Import and export for Units of Measure, Manufacturers, Service Groups and Product Groups."
+  },
+  {
+    "date": "2026-01-24",
+    "type": "Enhancement",
+    "module": "Inventory",
+    "change": "Stock Transfer printout redesigned."
+  },
+  {
+    "date": "2026-01-24",
+    "type": "Enhancement",
+    "module": "Purchasing",
+    "change": "Supplier approval flow, journal voucher numbering, reference number on documents, business style on customers, and footers for Purchase Receipts and Stock Releases."
+  },
+  {
+    "date": "2026-02-02",
+    "type": "New Feature",
+    "module": "CRM",
+    "change": "Promotions on products, product categories and services, with fixed-amount or percentage discounts."
+  },
+  {
+    "date": "2026-02-02",
+    "type": "Enhancement",
+    "module": "Inventory",
+    "change": "Edit a serial-numbered product's transaction."
+  },
+  {
+    "date": "2026-02-12",
+    "type": "Enhancement",
+    "module": "Accounting",
+    "change": "Deposit date on Deposits."
+  },
+  {
+    "date": "2026-02-26",
+    "type": "New Feature",
+    "module": "Purchasing",
+    "change": "Import items into a Purchase Order from a file, with a preview step."
+  },
+  {
+    "date": "2026-02-26",
+    "type": "New Feature",
+    "module": "Inventory",
+    "change": "Watchlist for monitoring selected products."
+  },
+  {
+    "date": "2026-02-26",
+    "type": "Enhancement",
+    "module": "Accounting",
+    "change": "Transfer date on Fund Transfers."
+  },
+  {
+    "date": "2026-03-16",
+    "type": "Enhancement",
+    "module": "Inventory",
+    "change": "Product unit settings updated."
+  },
+  {
+    "date": "2026-03-24",
+    "type": "New Feature",
+    "module": "Sales",
+    "change": "Show-tax option per location for Estimates, Job Orders, Sales Orders, Quick Sales and Invoices."
+  },
+  {
+    "date": "2026-03-31",
+    "type": "New Feature",
+    "module": "Reports",
+    "change": "Received Products report."
+  },
+  {
+    "date": "2026-03-31",
+    "type": "Enhancement",
+    "module": "Services",
+    "change": "Services list loads page by page; numbered pager."
+  },
+  {
+    "date": "2026-04-10",
+    "type": "Enhancement",
+    "module": "Printing",
+    "change": "Invoices show a REPRINTED label after the first print; optional confirm-before-print; custom Gate Pass template per location."
+  },
+  {
+    "date": "2026-04-22",
+    "type": "New Feature",
+    "module": "Operations",
+    "change": "Jobs Board 3 with job schedule, mechanic clock-in/out and status updates from the board."
+  },
+  {
+    "date": "2026-05-04",
+    "type": "New Feature",
+    "module": "Accounting",
+    "change": "Profit center and cost center codes per location; document reference on stock adjustments; optional payment details on invoices."
+  },
+  {
+    "date": "2026-05-04",
+    "type": "Enhancement",
+    "module": "General",
+    "change": "Location selection lists only the user's available locations; faster Home, Journals and Reports."
+  },
+  {
+    "date": "2026-05-20",
+    "type": "New Feature",
+    "module": "Accounting",
+    "change": "Final withholding tax per customer, applied on Job Orders, Sales Orders and Invoices and tracked on payments."
+  },
+  {
+    "date": "2026-05-20",
+    "type": "New Feature",
+    "module": "CRM",
+    "change": "Customer Groups and Supplier Groups."
+  },
+  {
+    "date": "2026-05-20",
+    "type": "Enhancement",
+    "module": "Inventory",
+    "change": "Stock adjustment reasons can be marked Transfer In or Transfer Out and carry a code."
+  },
+  {
+    "date": "2026-05-27",
+    "type": "New Feature",
+    "module": "Accounting",
+    "change": "General Journal, Sales Journal and Purchase Journal reports; Inventory Book permission."
+  },
+  {
+    "date": "2026-05-28",
+    "type": "Enhancement",
+    "module": "General",
+    "change": "Faster Job Orders, Invoices, Payments, Sales Orders, Quick Sales, Stock Transfers and Jobs Boards."
+  },
+  {
+    "date": "2026-05-31",
+    "type": "Enhancement",
+    "module": "General",
+    "change": "Friendlier page when a link is missing or out of date."
+  },
+  {
+    "date": "2026-06-03",
+    "type": "Enhancement",
+    "module": "Reports",
+    "change": "Incentive report updated."
+  },
+  {
+    "date": "2026-06-08",
+    "type": "Enhancement",
+    "module": "Accounting",
+    "change": "Journal transaction types; check date on Expenses; Balance Sheet, Income Statement, Cash Flow, Trial Balance and General Ledger reworked."
+  },
+  {
+    "date": "2026-06-13",
+    "type": "New Feature",
+    "module": "CRM",
+    "change": "Customer Reviews: customers rate a completed job through a review link; the shop sees reviews with filters."
+  },
+  {
+    "date": "2026-06-13",
+    "type": "New Feature",
+    "module": "CRM",
+    "change": "Appointment Reminders by SMS, with a reminder list and settings."
+  },
+  {
+    "date": "2026-06-30",
+    "type": "New Feature",
+    "module": "Accounting",
+    "change": "Cash Receipt Journal and Cash Disbursement Journal reports."
+  },
+  {
+    "date": "2026-07-26",
+    "type": "New Feature",
+    "module": "Reports",
+    "change": "Sales Summary report, Payment Summary and Sales by Service."
+  },
+  {
+    "date": "2026-07-26",
+    "type": "New Feature",
+    "module": "Sales",
+    "change": "Payment terms on Job Orders, Sales Orders and Invoices; deposits linked to a Job Order or Sales Order."
+  },
+  {
+    "date": "2026-07-26",
+    "type": "Enhancement",
+    "module": "Accounting",
+    "change": "Fund Transfer numbering with prefix; credit-card flag on payment methods."
+  },
+  {
+    "date": "2026-08-20",
+    "type": "Enhancement",
+    "module": "SMS",
+    "change": "M360 added as an SMS provider."
+  },
+  {
+    "date": "2026-08-20",
+    "type": "Enhancement",
+    "module": "Reports",
+    "change": "Sales Summary report refinements; Invoice, Purchase Order and Stock Adjustment screen updates."
+  },
+  {
+    "date": "2026-08-30",
+    "type": "Enhancement",
+    "module": "Reports",
+    "change": "Mechanic Jobs report shows more job detail."
+  },
+  {
+    "date": "2026-09-13",
+    "type": "New Feature",
+    "module": "Accounting",
+    "change": "Fixed Assets register with asset types and depreciation runs."
+  },
+  {
+    "date": "2026-09-13",
+    "type": "New Feature",
+    "module": "Sales",
+    "change": "Sales Returns from an Invoice, Quick Sale or Sales Order; stock returns to inventory."
+  },
+  {
+    "date": "2026-09-13",
+    "type": "Enhancement",
+    "module": "General",
+    "change": "Faster list pages for Invoices, Payments, Deposits, Sales Orders, Quick Sales, Purchase Orders, Supplier Invoices, Remittances, Stock Adjustments, Transfers, Releases, Cycle Counts, Vehicles and Inspections."
+  },
+  {
+    "date": "2026-09-13",
+    "type": "Enhancement",
+    "module": "Printing",
+    "change": "Payments show whether they were printed; optional confirm-before-print."
+  },
+  {
+    "date": "2026-09-13",
+    "type": "Enhancement",
+    "module": "Purchasing",
+    "change": "Supplier Refund numbering, check date and reference number."
+  },
+  {
+    "date": "2026-09-22",
+    "type": "New Feature",
+    "module": "Sales",
+    "change": "Customer Credit (credit memo) and Customer Refunds: apply credit to invoices or refund it."
+  },
+  {
+    "date": "2026-09-22",
+    "type": "Enhancement",
+    "module": "Sales",
+    "change": "Separate withholding-tax rate for Sales Order products."
+  },
+  {
+    "date": "2026-10-04",
+    "type": "New Feature",
+    "module": "Payroll",
+    "change": "Payroll runs with earnings, deductions and time entries; Benefits, Deductions and Tax Table setup."
+  },
+  {
+    "date": "2026-10-04",
+    "type": "Enhancement",
+    "module": "SMS",
+    "change": "Sender ID per location for SMS."
+  },
+  {
+    "date": "2026-10-12",
+    "type": "New Feature",
+    "module": "Reports",
+    "change": "Daily Summary report: Day at a Glance, Sales, Cash Movement, Payables, Inventory Movement and Shop Activity."
+  },
+  {
+    "date": "2026-10-12",
+    "type": "New Feature",
+    "module": "Accounting",
+    "change": "Purchase withholding tax with the shop as withholding agent; BIR Form 2307 printing with ATC, TIN, ZIP code and tax-agent accreditation."
+  },
+  {
+    "date": "2026-10-13",
+    "type": "Enhancement",
+    "module": "SMS",
+    "change": "SMS campaigns and service reminders use the location's Sender ID."
+  }
+]

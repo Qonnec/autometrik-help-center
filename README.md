@@ -23,3 +23,23 @@ The website groups articles by topic and provides search. Start with [Introducti
 5. Open a pull request for review. After it is merged into `main`, GitHub Actions rebuilds and publishes the Help Center.
 
 Numbered folders and filenames set the article order. Existing website links use those positions, so avoid renumbering published articles unless you also plan to update links to them.
+
+## Add a release note
+
+The Release Notes page (`#releases`) reads `release-notes.json` in the repository root. Each item is one change shipped to shops:
+
+```json
+{
+  "date": "2026-10-13",
+  "type": "Enhancement",
+  "module": "SMS",
+  "change": "SMS campaigns and service reminders use the location's Sender ID."
+}
+```
+
+- `date` — release date in `YYYY-MM-DD` format.
+- `type` — `New Feature`, `Enhancement` or `Bug Fix`. Other values still display, with a neutral badge.
+- `module` — the area of Autometrik, such as `Sales`, `Inventory` or `Accounting`. The module filter is built from these values, so reuse existing names.
+- `change` — one plain-text sentence describing the change for shop users.
+
+Add new items at the end of the file. The page sorts by date and shows the newest first, grouped by month. The publish workflow checks the file and stops if it is not valid JSON or an item is missing a field.

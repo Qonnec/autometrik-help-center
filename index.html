@@ -17,6 +17,7 @@
   --ink:#24302f; --muted:#6b7877; --line:#e1e8e7; --panel:#f2f5f5;
   --bg:#ffffff; --surface:#ffffff; --foot:#f2f4f4; --mark:#fff3b0;
   --deco:rgba(0,45,90,.24); --shadow:0 0 0 6px rgba(255,255,255,.18);
+  --rn-new-bg:#e4f6da; --rn-new-fg:#2c6610; --rn-enh-bg:#e0f0fa; --rn-enh-fg:#035f8e; --rn-fix-bg:#fdeadb; --rn-fix-fg:#97470a;
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
@@ -24,6 +25,7 @@
   --ink:#e3ecea; --muted:#9aaaa8; --line:#2a3938; --panel:#182423;
   --bg:#101918; --surface:#101918; --foot:#0c1413; --mark:#5b5117;
   --deco:rgba(0,20,45,.35); --shadow:0 0 0 6px rgba(255,255,255,.08);
+  --rn-new-bg:#1d3712; --rn-new-fg:#a8e585; --rn-enh-bg:#0e2c40; --rn-enh-fg:#90cff2; --rn-fix-bg:#3b2610; --rn-fix-fg:#f3b57a;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:15px/1.6 Roboto,"Segoe UI",Helvetica,Arial,sans-serif;min-height:100%;display:flex;flex-direction:column}
@@ -151,6 +153,41 @@ aside{display:grid;gap:20px}
 .pager a:hover{color:var(--teal)}
 .pager .next{text-align:right;grid-column:2}
 
+/* release notes */
+.rn-intro{color:var(--muted);margin:14px 0 0;font-size:14.5px}
+.rn-filters{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;margin:20px 0 4px}
+.rn-chips{display:flex;flex-wrap:wrap;gap:8px}
+.rn-chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:500;cursor:pointer}
+.rn-chip:hover{border-color:var(--teal);color:var(--teal)}
+.rn-chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--on-teal)}
+.rn-chip .n{margin-left:6px;font-weight:400;opacity:.75}
+.rn-mod{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.rn-mod select{height:34px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);padding:0 10px;font:inherit;font-size:13px;max-width:100%}
+.rn-month{font-size:17px;font-weight:500;margin:30px 0 0;padding-bottom:8px;border-bottom:2px solid var(--green)}
+.rn-group{scroll-margin-top:16px}
+.rn-list{list-style:none;margin:0;padding:0}
+.rn-item{display:grid;grid-template-columns:58px 120px minmax(0,1fr);gap:6px 16px;padding:14px 2px;border-bottom:1px solid var(--line);align-items:baseline}
+.rn-date{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rn-badge{justify-self:start;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:3px;padding:2px 7px;white-space:nowrap}
+.rn-badge.new{background:var(--rn-new-bg);color:var(--rn-new-fg)}
+.rn-badge.enh{background:var(--rn-enh-bg);color:var(--rn-enh-fg)}
+.rn-badge.fix{background:var(--rn-fix-bg);color:var(--rn-fix-fg)}
+.rn-badge.other{background:var(--panel);color:var(--muted)}
+.rn-body{min-width:0;overflow-wrap:anywhere}
+.rn-module{display:block;font-size:12px;font-weight:700;color:var(--teal);margin-bottom:2px}
+.rn-change{line-height:1.6}
+.rn-clear{border:0;background:none;color:var(--teal);font:inherit;text-decoration:underline;cursor:pointer;padding:0}
+.box li a .n{color:var(--muted)}
+.box ul.rn-mini{margin-bottom:18px;gap:12px}
+.rn-mini a{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rn-mini-meta{display:block;font-size:12px;color:var(--muted);margin-bottom:1px}
+@media (max-width:600px){
+  .rn-item{grid-template-columns:auto minmax(0,1fr);gap:6px 12px}
+  .rn-body{grid-column:1/-1}
+  .rn-mod{width:100%}
+  .rn-mod select{flex:1}
+}
+
 footer{background:var(--foot);color:var(--muted);font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:30px}
 footer nav{display:flex;gap:20px;flex-wrap:wrap}
@@ -182,6 +219,7 @@ footer a:hover{color:var(--teal)}
       <a href="#c-2">Business Guide</a>
       <a href="#c-17">Troubleshooting</a>
       <a href="#c-18">Forms &amp; Downloads</a>
+      <a href="#releases">Release Notes</a>
     </nav>
     <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
       <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
@@ -222,7 +260,7 @@ footer a:hover{color:var(--teal)}
 
 <footer><div class="wrap">
   <span>© Autometrik Auto Repair &amp; Tire Shop Software</span>
-  <nav aria-label="Footer"><a href="#home">Help Topics</a><a href="#c-3">Getting Started</a><a href="#c-17">Troubleshooting</a><a href="#c-18">Forms &amp; Downloads</a></nav>
+  <nav aria-label="Footer"><a href="#home">Help Topics</a><a href="#c-3">Getting Started</a><a href="#c-17">Troubleshooting</a><a href="#c-18">Forms &amp; Downloads</a><a href="#releases">Release Notes</a></nav>
 </div></footer>
 
 <script>
@@ -306,7 +344,7 @@ const aHref = a => `#a-${a.ci+1}-${a.ai+1}`;
 
 function sideDefault(){
   const pop = POPULAR.map(t => FLAT.find(a => a.t === t)).filter(Boolean);
-  return `<div class="box"><h4>Popular Articles</h4><ul>${pop.map(a=>`<li><a href="${aHref(a)}">${esc(a.t)}</a></li>`).join('')}</ul></div>` + supportBox();
+  return `<div class="box"><h4>Popular Articles</h4><ul>${pop.map(a=>`<li><a href="${aHref(a)}">${esc(a.t)}</a></li>`).join('')}</ul></div><div class="box" id="whatsNew" hidden></div>` + supportBox();
 }
 function supportBox(){
   return `<div class="box"><h4>Need Support?</h4><p>Can't find the answer you're looking for? Try the troubleshooting guide or walk through a training scenario.</p><a class="btn" href="#c-17">Troubleshooting</a></div>`;
@@ -317,6 +355,7 @@ function renderHome(){
   $('#view').innerHTML = `<h2 class="sec-title">Help Topics</h2><div class="topics">${CATS.map((c,i)=>`
     <a class="topic" href="#c-${i+1}"><div class="ic">${icon(c.name)}</div><div><h3>${esc(c.name)}</h3><p>${esc(DESC[c.name]||'')}</p><span class="count">${c.arts.length} article${c.arts.length>1?'s':''}</span></div></a>`).join('')}</div>`;
   $('#side').innerHTML = sideDefault();
+  showWhatsNew();
 }
 
 function renderCat(ci){
@@ -406,15 +445,93 @@ function renderResults(q){
     ${r.length ? `<ul class="list">${r.slice(0,50).map(a=>`<li><a href="${aHref(a)}">${DOC_ICON}<span>${esc(a.t)}<small>${esc(a.cat)} — ${snippet(a,q)}</small></span></a></li>`).join('')}</ul>`
       : `<p class="empty">No articles match that search. Try fewer or different words, such as “job order” or “invoice”.</p>`}`;
   $('#side').innerHTML = sideDefault();
+  showWhatsNew();
 }
+
+/* release notes (data: release-notes.json) */
+const RN_TYPES = ["New Feature","Enhancement","Bug Fix"];
+const RN_CLASS = {"New Feature":"new","Enhancement":"enh","Bug Fix":"fix"};
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const rnFilter = {type:'', module:''};
+let NOTES = null, notesLoad = null;
+function loadNotes(){
+  if(!notesLoad) notesLoad = fetch('release-notes.json').then(r => { if(!r.ok) throw new Error(r.status); return r.json(); }).then(data => {
+    const list = Array.isArray(data) ? data : [];
+    NOTES = list.map((n,i) => n && typeof n === 'object' ? {
+        date: String(n.date||'').trim(), type: String(n.type||'Update').trim(),
+        module: String(n.module||'General').trim(), change: String(n.change||'').trim(), i } : null)
+      .filter(n => n && /^\d{4}-(0[1-9]|1[0-2])-\d{2}$/.test(n.date) && n.change)
+      .sort((a,b) => a.date < b.date ? 1 : a.date > b.date ? -1 : a.i - b.i);
+    return NOTES;
+  }).catch(err => { notesLoad = null; throw err; });
+  return notesLoad;
+}
+const rnDay = d => `${MONTHS[+d.slice(5,7)-1].slice(0,3)} ${+d.slice(8,10)}`;
+const rnMonth = ym => `${MONTHS[+ym.slice(5,7)-1]} ${ym.slice(0,4)}`;
+const rnBadge = t => `<span class="rn-badge ${RN_CLASS[t]||'other'}">${esc(t)}</span>`;
+const isReleaseRoute = () => /^(releases|rn-\d{4}-\d{2})$/.test(location.hash.slice(1));
+const RN_CRUMBS = `<div class="crumbs"><a href="#home">Help Topics</a><span>›</span><span>Release Notes</span></div><h2 class="sec-title">Release Notes</h2>`;
+
+function renderReleases(month, focusSel){
+  $('#hero').classList.add('compact');
+  if(!NOTES){
+    $('#view').innerHTML = `${RN_CRUMBS}<p class="empty" id="rnStatus">Loading release notes…</p>`;
+    $('#side').innerHTML = supportBox();
+    loadNotes().then(() => { if(isReleaseRoute()) route(); })
+      .catch(() => { const s = $('#rnStatus'); if(s && isReleaseRoute()) s.textContent = 'The release notes could not be loaded. Reload the page to try again.'; });
+    return;
+  }
+  const modules = [...new Set(NOTES.map(n => n.module))].sort((a,b) => a.localeCompare(b));
+  if(rnFilter.module && !modules.includes(rnFilter.module)) rnFilter.module = '';
+  const types = [...RN_TYPES.filter(t => NOTES.some(n => n.type === t)),
+    ...[...new Set(NOTES.map(n => n.type))].filter(t => !RN_TYPES.includes(t)).sort()];
+  const byModule = NOTES.filter(n => !rnFilter.module || n.module === rnFilter.module);
+  const shown = byModule.filter(n => !rnFilter.type || n.type === rnFilter.type);
+  const groups = [];
+  for(const n of shown){
+    const ym = n.date.slice(0,7); let g = groups[groups.length-1];
+    if(!g || g.ym !== ym) groups.push(g = {ym, items:[]});
+    g.items.push(n);
+  }
+  const chip = (val, label, count) => `<button type="button" class="rn-chip" data-type="${esc(val)}" aria-pressed="${rnFilter.type === val}">${esc(label)}<span class="n">${count}</span></button>`;
+  const latest = NOTES[0];
+  $('#view').innerHTML = `${RN_CRUMBS}
+    <p class="rn-intro">Every change released to Autometrik shops, newest first.${latest ? ` Last update: ${rnDay(latest.date)}, ${latest.date.slice(0,4)}.` : ''}</p>
+    <div class="rn-filters">
+      <div class="rn-chips" role="group" aria-label="Filter by type">${chip('', 'All', byModule.length)}${types.map(t => chip(t, t, byModule.filter(n => n.type === t).length)).join('')}</div>
+      <label class="rn-mod">Module <select id="rnModule"><option value="">All modules</option>${modules.map(m => `<option value="${esc(m)}"${m === rnFilter.module ? ' selected' : ''}>${esc(m)}</option>`).join('')}</select></label>
+    </div>
+    ${groups.length ? groups.map(g => `<section class="rn-group" id="rn-${g.ym}"><h3 class="rn-month">${rnMonth(g.ym)}</h3><ul class="rn-list">${g.items.map(n => `
+      <li class="rn-item"><time class="rn-date" datetime="${n.date}">${rnDay(n.date)}</time>${rnBadge(n.type)}<div class="rn-body"><span class="rn-module">${esc(n.module)}</span><span class="rn-change">${esc(n.change)}</span></div></li>`).join('')}</ul></section>`).join('')
+      : `<p class="empty">${NOTES.length ? 'No release notes match these filters. <button type="button" class="rn-clear">Show all release notes</button>' : 'No release notes have been published yet.'}</p>`}`;
+  $('#side').innerHTML = (groups.length ? `<div class="box"><h4>Jump to Month</h4><ul>${groups.map(g => `<li><a href="#rn-${g.ym}"${g.ym === month ? ' class="cur"' : ''}>${rnMonth(g.ym)} <span class="n">(${g.items.length})</span></a></li>`).join('')}</ul></div>` : '') + supportBox();
+
+  $('#view').querySelectorAll('.rn-chip').forEach(b => b.addEventListener('click', () => {
+    rnFilter.type = b.dataset.type; renderReleases(null, `.rn-chip[data-type="${CSS.escape(b.dataset.type)}"]`);
+  }));
+  $('#rnModule').addEventListener('change', e => { rnFilter.module = e.target.value; renderReleases(null, '#rnModule'); });
+  const clear = $('#view').querySelector('.rn-clear');
+  if(clear) clear.addEventListener('click', () => { rnFilter.type = ''; rnFilter.module = ''; renderReleases(null, '.rn-chip[data-type=""]'); });
+  if(focusSel){ const f = $('#view').querySelector(focusSel); if(f) f.focus(); }
+  if(month){ const el = document.getElementById('rn-' + month); if(el) requestAnimationFrame(() => el.scrollIntoView()); else window.scrollTo({top:0}); }
+}
+
+function fillWhatsNew(){
+  const box = $('#whatsNew'); if(!box || !NOTES || !NOTES.length) return;
+  box.innerHTML = `<h4>What's New</h4><ul class="rn-mini">${NOTES.slice(0,3).map(n => `<li><a href="#rn-${n.date.slice(0,7)}"><span class="rn-mini-meta">${rnDay(n.date)} · ${esc(n.module)}</span>${esc(n.change)}</a></li>`).join('')}</ul><a class="btn" href="#releases">All Release Notes</a>`;
+  box.hidden = false;
+}
+function showWhatsNew(){ if(NOTES) fillWhatsNew(); else loadNotes().then(fillWhatsNew).catch(() => {}); }
 
 function route(){
   $('#suggest').hidden = true;
   const h = location.hash.slice(1); let m;
   if((m = h.match(/^a-(\d+)-(\d+)$/))) renderArticle(+m[1]-1, +m[2]-1);
   else if((m = h.match(/^c-(\d+)$/))) renderCat(+m[1]-1);
+  else if(h === 'releases') renderReleases(null);
+  else if((m = h.match(/^rn-(\d{4}-\d{2})$/))) renderReleases(m[1]);
   else renderHome();
-  if(h && h !== 'home') window.scrollTo({top:0});
+  if(h && h !== 'home' && !h.startsWith('rn-')) window.scrollTo({top:0});
 }
 
 /* live suggestions */
