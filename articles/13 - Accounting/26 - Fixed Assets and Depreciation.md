@@ -1,6 +1,4 @@
-# Autometrik User Guide: Fixed Assets and Depreciation
-
-Nov 4, 2026 · @hen
+# Fixed Assets and Depreciation
 
 ## Overview
 
@@ -100,9 +98,7 @@ The Fixed Assets list shows Name, Type, Serial No, Purchased, Cost, Accum. Dep.,
 
 Each period gets an equal share of the depreciable amount, rounded to two decimals:
 
-```latex
-\text{Depreciation per period} = \frac{\text{Purchase Cost} - \text{End of Life Value}}{\text{Useful Life (Years)} \times \text{Periods per Year}}
-```
+> **Depreciation per period** = (Purchase Cost − End of Life Value) ÷ (Useful Life in Years × Periods per Year)
 
 The **last period absorbs any rounding difference**, so the book value lands exactly on the End of Life Value. Periods start on the Depreciation Start Date and each covers 12 ÷ periods-per-year months (1 month for Monthly, 3 for Quarterly, 12 for Annually).
 
