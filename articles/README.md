@@ -193,6 +193,7 @@
 - [How to Manage Post-Dated Check and Check Clearing](13%20-%20Accounting/23%20-%20How%20to%20Manage%20Post-Dated%20Check%20and%20Check%20Clearing.md)
 - [How to Manage Customer Check Payment and Clearing](13%20-%20Accounting/24%20-%20How%20to%20Manage%20Customer%20Check%20Payment%20and%20Clearing.md)
 - [How to Manage Supplier Check Payment and Clearing](13%20-%20Accounting/25%20-%20How%20to%20Manage%20Supplier%20Check%20Payment%20and%20Clearing.md)
+- [How to Manage Supplier Check Payment and Clearing](13%20-%20Accounting/26%20-%20Fixed%20Assets%20And%20Depreciation.md)
 
 ## Reports
 
