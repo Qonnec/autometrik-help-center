@@ -25,16 +25,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Build article index
-        run: node scripts/build-articles.mjs
+          cache: npm
+      - name: Install build dependencies
+        run: npm ci
       - uses: actions/configure-pages@v5
-      - name: Prepare site files
-        run: |
-          mkdir -p _site/articles
-          cp index.html articles.json _site/
-          cp -R images _site/
-          cp -R articles/images _site/articles/
-          cp -R forms _site/
+        id: pages
+      - name: Build site
+        run: npm run build
+        env:
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
