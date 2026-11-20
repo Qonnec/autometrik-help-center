@@ -298,5 +298,95 @@
     "type": "Enhancement",
     "module": "SMS",
     "change": "SMS campaigns and service reminders use the location's Sender ID."
+  },
+  {
+    "date": "2026-11-05",
+    "type": "New Feature",
+    "module": "Inventory",
+    "change": "Inventory Forecasting: suggests reorder quantities from recent sales, safety stock and incoming stock, flags Critical and Reorder soon products, and adds them to the Purchase Cart."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "New Feature",
+    "module": "Accounting",
+    "change": "BIR Form 2307 register: one 2307 per completed Supplier Payment, numbered in its own series (default prefix BIRWT, set in System Numbers), viewable and re-printable at any time."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Enhancement",
+    "module": "Accounting",
+    "change": "Purchase withholding tax is withheld on the Supplier Payment only, not on Purchase Orders, Purchase Receipts or Supplier Invoices; Withhold Tax defaults from the supplier and each payment's 2307 covers one quarter."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Enhancement",
+    "module": "Sales",
+    "change": "Customer Credit supports service lines and can be created from an Invoice to credit its products and services."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Enhancement",
+    "module": "Printing",
+    "change": "Customer Credit print settings per location: title, footer with placeholders, confirm-before-print with REPRINTED label, and a custom print template."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Enhancement",
+    "module": "Reports",
+    "change": "Incentive report deducts the incentive of products credited on approved customer credits created from an invoice."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Enhancement",
+    "module": "Sales",
+    "change": "Create & Confirm on new Sales Orders, with a stock check before saving."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Enhancement",
+    "module": "Sales",
+    "change": "Customer Payment lines show each invoice's amount, EWT, FWT, deposit, paid and balance."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Enhancement",
+    "module": "Reports",
+    "change": "Daily Summary report: Sales and Payables sections reorganized; Payables shows billed and paid amounts per supplier or account."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Enhancement",
+    "module": "Inventory",
+    "change": "In Stock filter on Stock Quantities and Product Inquiry; Additions and Deductions filter on Product Transactions."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Enhancement",
+    "module": "Setup",
+    "change": "Location setting to require a mobile number on customers; location settings show the BIR CAS registration (acknowledgement certificate number, issue and effectivity dates)."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Bug Fix",
+    "module": "Inventory",
+    "change": "Serial numbers are reserved and released correctly when documents are edited, cancelled or released, including duplicate serial numbers and the same serial number on different products."
+  },
+  {
+    "date": "2026-11-08",
+    "type": "Bug Fix",
+    "module": "General",
+    "change": "When stock cannot cover a Job Order, Sales Order, Quick Sale, Stock Transfer or Invoice, a clear message is shown and nothing is saved, instead of an error page."
+  },
+  {
+    "date": "2026-11-12",
+    "type": "Enhancement",
+    "module": "Setup",
+    "change": "Location setting to require an email address when creating a customer."
+  },
+  {
+    "date": "2026-11-12",
+    "type": "Enhancement",
+    "module": "Printing",
+    "change": "Sales Order printout shows the location's Sales Order footer."
   }
 ]

@@ -146,6 +146,7 @@
 - [How to Use Inventory Cycle Count](09%20-%20Inventory/31%20-%20How%20to%20Use%20Inventory%20Cycle%20Count.md)
 - [Understanding Stock Quantities and Movements](09%20-%20Inventory/32%20-%20Understanding%20Stock%20Quantities%20and%20Movements.md)
 - [How to Track Stock Transfer Flow](09%20-%20Inventory/33%20-%20How%20to%20Track%20Stock%20Transfer%20Flow.md)
+- [How to Use Inventory Forecasting](09%20-%20Inventory/34%20-%20How%20to%20Use%20Inventory%20Forecasting.md)
 
 ## Product Inquiries
 
@@ -193,7 +194,7 @@
 - [How to Manage Post-Dated Check and Check Clearing](13%20-%20Accounting/23%20-%20How%20to%20Manage%20Post-Dated%20Check%20and%20Check%20Clearing.md)
 - [How to Manage Customer Check Payment and Clearing](13%20-%20Accounting/24%20-%20How%20to%20Manage%20Customer%20Check%20Payment%20and%20Clearing.md)
 - [How to Manage Supplier Check Payment and Clearing](13%20-%20Accounting/25%20-%20How%20to%20Manage%20Supplier%20Check%20Payment%20and%20Clearing.md)
-- [How to Manage Supplier Check Payment and Clearing](13%20-%20Accounting/26%20-%20Fixed%20Assets%20And%20Depreciation.md)
+- [Fixed Assets and Depreciation](13%20-%20Accounting/26%20-%20Fixed%20Assets%20and%20Depreciation.md)
 
 ## Reports
 
