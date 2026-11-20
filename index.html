@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Autometrik Help Center</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>try{if(localStorage.getItem('am-theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -211,15 +214,15 @@ footer a:hover{color:var(--teal)}
 
 <div class="brandbar"><div class="wrap">
   <div class="topbar">
-    <a class="brand" href="#home" aria-label="Autometrik Help Center home"><img src="images/logo.png" alt="Autometrik" width="277" height="56"></a>
+    <a class="brand" href="./" aria-label="Autometrik Help Center home"><img src="images/logo.png" alt="Autometrik" width="277" height="56"></a>
     <button class="nav-toggle" id="navToggle" type="button" aria-controls="mainNav" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     <nav class="main" id="mainNav" aria-label="Main">
-      <a href="#home">Help Topics</a>
-      <a href="#c-3">Getting Started</a>
-      <a href="#c-2">Business Guide</a>
-      <a href="#c-17">Troubleshooting</a>
-      <a href="#c-18">Forms &amp; Downloads</a>
-      <a href="#releases">Release Notes</a>
+      <a href="./">Help Topics</a>
+      <a href="topics/getting-started/">Getting Started</a>
+      <a href="topics/business-process-and-system-flow-guide/">Business Guide</a>
+      <a href="topics/troubleshooting/">Troubleshooting</a>
+      <a href="topics/forms-downloads/">Forms &amp; Downloads</a>
+      <a href="release-notes/">Release Notes</a>
     </nav>
     <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
       <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
@@ -260,7 +263,7 @@ footer a:hover{color:var(--teal)}
 
 <footer><div class="wrap">
   <span>© Autometrik Auto Repair &amp; Tire Shop Software</span>
-  <nav aria-label="Footer"><a href="#home">Help Topics</a><a href="#c-3">Getting Started</a><a href="#c-17">Troubleshooting</a><a href="#c-18">Forms &amp; Downloads</a><a href="#releases">Release Notes</a></nav>
+  <nav aria-label="Footer"><a href="./">Help Topics</a><a href="topics/getting-started/">Getting Started</a><a href="topics/troubleshooting/">Troubleshooting</a><a href="topics/forms-downloads/">Forms &amp; Downloads</a><a href="release-notes/">Release Notes</a></nav>
 </div></footer>
 
 <script>
@@ -340,20 +343,27 @@ syncThemeButton();
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const plain = md => md.replace(/!\[[^\]]*\]\([^)]*\)/g,'').replace(/<[^>]+>/g,' ').replace(/[#*_`>|\\-]+/g,' ').replace(/\s+/g,' ').trim();
 const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[name]||ICON["Introduction"]}</svg>`;
-const aHref = a => `#a-${a.ci+1}-${a.ai+1}`;
+const aHref = a => `articles/${a.slug}/`;
+const cHref = c => `topics/${c.slug}/`;
+const articleByNumber = (ci, ai) => CATS[ci-1]?.arts[ai-1];
+const canonicalMarkdown = md => md.replace(/\]\(#a-(\d+)-(\d+)\)/g, (link, ci, ai) => {
+  const article = articleByNumber(+ci, +ai);
+  return article ? `](${aHref(article)})` : link;
+});
 
 function sideDefault(){
   const pop = POPULAR.map(t => FLAT.find(a => a.t === t)).filter(Boolean);
   return `<div class="box"><h4>Popular Articles</h4><ul>${pop.map(a=>`<li><a href="${aHref(a)}">${esc(a.t)}</a></li>`).join('')}</ul></div><div class="box" id="whatsNew" hidden></div>` + supportBox();
 }
 function supportBox(){
-  return `<div class="box"><h4>Need Support?</h4><p>Can't find the answer you're looking for? Try the troubleshooting guide or walk through a training scenario.</p><a class="btn" href="#c-17">Troubleshooting</a></div>`;
+  return `<div class="box"><h4>Need Support?</h4><p>Can't find the answer you're looking for? Try the troubleshooting guide or walk through a training scenario.</p><a class="btn" href="topics/troubleshooting/">Troubleshooting</a></div>`;
 }
 
 function renderHome(){
   $('#hero').classList.remove('compact');
+  document.title = 'Autometrik Help Center';
   $('#view').innerHTML = `<h2 class="sec-title">Help Topics</h2><div class="topics">${CATS.map((c,i)=>`
-    <a class="topic" href="#c-${i+1}"><div class="ic">${icon(c.name)}</div><div><h3>${esc(c.name)}</h3><p>${esc(DESC[c.name]||'')}</p><span class="count">${c.arts.length} article${c.arts.length>1?'s':''}</span></div></a>`).join('')}</div>`;
+    <a class="topic" href="${cHref(c)}"><div class="ic">${icon(c.name)}</div><div><h3>${esc(c.name)}</h3><p>${esc(DESC[c.name]||'')}</p><span class="count">${c.arts.length} article${c.arts.length>1?'s':''}</span></div></a>`).join('')}</div>`;
   $('#side').innerHTML = sideDefault();
   showWhatsNew();
 }
@@ -361,22 +371,24 @@ function renderHome(){
 function renderCat(ci){
   const c = CATS[ci]; if(!c) return renderHome();
   $('#hero').classList.add('compact');
-  $('#view').innerHTML = `<div class="crumbs"><a href="#home">Help Topics</a><span>›</span><span>${esc(c.name)}</span></div>
+  document.title = `${c.name} | Autometrik Help Center`;
+  $('#view').innerHTML = `<div class="crumbs"><a href="./">Help Topics</a><span>›</span><span>${esc(c.name)}</span></div>
     <h2 class="sec-title">${esc(c.name)}</h2>
-    <ul class="list">${c.arts.map((a,ai)=>`<li><a href="#a-${ci+1}-${ai+1}">${DOC_ICON}<span>${esc(a.t)}</span></a></li>`).join('')}</ul>`;
-  $('#side').innerHTML = `<div class="box"><h4>All Topics</h4><ul>${CATS.map((x,i)=>`<li><a href="#c-${i+1}"${i===ci?' class="cur"':''}>${esc(x.name)}</a></li>`).join('')}</ul></div>` + supportBox();
+    <ul class="list">${c.arts.map(a=>`<li><a href="${aHref(a)}">${DOC_ICON}<span>${esc(a.t)}</span></a></li>`).join('')}</ul>`;
+  $('#side').innerHTML = `<div class="box"><h4>All Topics</h4><ul>${CATS.map((x,i)=>`<li><a href="${cHref(x)}"${i===ci?' class="cur"':''}>${esc(x.name)}</a></li>`).join('')}</ul></div>` + supportBox();
 }
 
 function renderArticle(ci, ai){
   const c = CATS[ci], a = c && c.arts[ai]; if(!a) return renderHome();
   $('#hero').classList.add('compact');
-  let html = DOMPurify.sanitize(marked.parse(a.md, {gfm:true}));
+  let html = DOMPurify.sanitize(marked.parse(canonicalMarkdown(a.md), {gfm:true}));
+  document.title = `${a.t} | Autometrik Help Center`;
   const prev = c.arts[ai-1], next = c.arts[ai+1];
   $('#view').innerHTML = `<article class="article">
-    <div class="crumbs"><a href="#home">Help Topics</a><span>›</span><a href="#c-${ci+1}">${esc(c.name)}</a></div>
+    <div class="crumbs"><a href="./">Help Topics</a><span>›</span><a href="${cHref(c)}">${esc(c.name)}</a></div>
     <h1>${esc(a.t)}</h1><div class="meta">${esc(c.name)} · Article ${ai+1} of ${c.arts.length}</div>
     <div class="prose">${html}</div>
-    <div class="pager">${prev?`<a href="#a-${ci+1}-${ai}"><small>← Previous</small>${esc(prev.t)}</a>`:''}${next?`<a class="next" href="#a-${ci+1}-${ai+2}"><small>Next →</small>${esc(next.t)}</a>`:''}</div>
+    <div class="pager">${prev?`<a href="${aHref(prev)}"><small>← Previous</small>${esc(prev.t)}</a>`:''}${next?`<a class="next" href="${aHref(next)}"><small>Next →</small>${esc(next.t)}</a>`:''}</div>
   </article>`;
   $('#view').querySelectorAll('.prose table').forEach(t => {
     const w = document.createElement('div'); w.className = 'tbl'; t.replaceWith(w); w.appendChild(t);
@@ -413,7 +425,7 @@ function renderArticle(ci, ai){
     link.appendChild(img);
   });
   $('#view').querySelectorAll('.prose a[href^="http"]').forEach(l => { l.target='_blank'; l.rel='noopener'; });
-  $('#side').innerHTML = `<div class="box"><h4>In ${esc(c.name)}</h4><ul>${c.arts.map((x,i)=>`<li><a href="#a-${ci+1}-${i+1}"${i===ai?' class="cur"':''}>${esc(x.t)}</a></li>`).join('')}</ul></div>` + supportBox();
+  $('#side').innerHTML = `<div class="box"><h4>In ${esc(c.name)}</h4><ul>${c.arts.map((x,i)=>`<li><a href="${aHref(x)}"${i===ai?' class="cur"':''}>${esc(x.t)}</a></li>`).join('')}</ul></div>` + supportBox();
 }
 
 function search(q){
@@ -440,7 +452,8 @@ function snippet(a, q){
 function renderResults(q){
   $('#hero').classList.add('compact');
   const r = search(q);
-  $('#view').innerHTML = `<div class="crumbs"><a href="#home">Help Topics</a><span>›</span><span>Search</span></div>
+  document.title = `Search | Autometrik Help Center`;
+  $('#view').innerHTML = `<div class="crumbs"><a href="./">Help Topics</a><span>›</span><span>Search</span></div>
     <h2 class="sec-title">${r.length} result${r.length===1?'':'s'} for “${esc(q)}”</h2>
     ${r.length ? `<ul class="list">${r.slice(0,50).map(a=>`<li><a href="${aHref(a)}">${DOC_ICON}<span>${esc(a.t)}<small>${esc(a.cat)} — ${snippet(a,q)}</small></span></a></li>`).join('')}</ul>`
       : `<p class="empty">No articles match that search. Try fewer or different words, such as “job order” or “invoice”.</p>`}`;
@@ -469,11 +482,12 @@ function loadNotes(){
 const rnDay = d => `${MONTHS[+d.slice(5,7)-1].slice(0,3)} ${+d.slice(8,10)}`;
 const rnMonth = ym => `${MONTHS[+ym.slice(5,7)-1]} ${ym.slice(0,4)}`;
 const rnBadge = t => `<span class="rn-badge ${RN_CLASS[t]||'other'}">${esc(t)}</span>`;
-const isReleaseRoute = () => /^(releases|rn-\d{4}-\d{2})$/.test(location.hash.slice(1));
-const RN_CRUMBS = `<div class="crumbs"><a href="#home">Help Topics</a><span>›</span><span>Release Notes</span></div><h2 class="sec-title">Release Notes</h2>`;
+const isReleaseRoute = () => /\/release-notes\/(?:index\.html)?$/.test(location.pathname);
+const RN_CRUMBS = `<div class="crumbs"><a href="./">Help Topics</a><span>›</span><span>Release Notes</span></div><h2 class="sec-title">Release Notes</h2>`;
 
 function renderReleases(month, focusSel){
   $('#hero').classList.add('compact');
+  document.title = 'Release Notes | Autometrik Help Center';
   if(!NOTES){
     $('#view').innerHTML = `${RN_CRUMBS}<p class="empty" id="rnStatus">Loading release notes…</p>`;
     $('#side').innerHTML = supportBox();
@@ -504,7 +518,7 @@ function renderReleases(month, focusSel){
     ${groups.length ? groups.map(g => `<section class="rn-group" id="rn-${g.ym}"><h3 class="rn-month">${rnMonth(g.ym)}</h3><ul class="rn-list">${g.items.map(n => `
       <li class="rn-item"><time class="rn-date" datetime="${n.date}">${rnDay(n.date)}</time>${rnBadge(n.type)}<div class="rn-body"><span class="rn-module">${esc(n.module)}</span><span class="rn-change">${esc(n.change)}</span></div></li>`).join('')}</ul></section>`).join('')
       : `<p class="empty">${NOTES.length ? 'No release notes match these filters. <button type="button" class="rn-clear">Show all release notes</button>' : 'No release notes have been published yet.'}</p>`}`;
-  $('#side').innerHTML = (groups.length ? `<div class="box"><h4>Jump to Month</h4><ul>${groups.map(g => `<li><a href="#rn-${g.ym}"${g.ym === month ? ' class="cur"' : ''}>${rnMonth(g.ym)} <span class="n">(${g.items.length})</span></a></li>`).join('')}</ul></div>` : '') + supportBox();
+  $('#side').innerHTML = (groups.length ? `<div class="box"><h4>Jump to Month</h4><ul>${groups.map(g => `<li><a href="release-notes/#rn-${g.ym}"${g.ym === month ? ' class="cur"' : ''}>${rnMonth(g.ym)} <span class="n">(${g.items.length})</span></a></li>`).join('')}</ul></div>` : '') + supportBox();
 
   $('#view').querySelectorAll('.rn-chip').forEach(b => b.addEventListener('click', () => {
     rnFilter.type = b.dataset.type; renderReleases(null, `.rn-chip[data-type="${CSS.escape(b.dataset.type)}"]`);
@@ -518,7 +532,7 @@ function renderReleases(month, focusSel){
 
 function fillWhatsNew(){
   const box = $('#whatsNew'); if(!box || !NOTES || !NOTES.length) return;
-  box.innerHTML = `<h4>What's New</h4><ul class="rn-mini">${NOTES.slice(0,3).map(n => `<li><a href="#rn-${n.date.slice(0,7)}"><span class="rn-mini-meta">${rnDay(n.date)} · ${esc(n.module)}</span>${esc(n.change)}</a></li>`).join('')}</ul><a class="btn" href="#releases">All Release Notes</a>`;
+  box.innerHTML = `<h4>What's New</h4><ul class="rn-mini">${NOTES.slice(0,3).map(n => `<li><a href="release-notes/#rn-${n.date.slice(0,7)}"><span class="rn-mini-meta">${rnDay(n.date)} · ${esc(n.module)}</span>${esc(n.change)}</a></li>`).join('')}</ul><a class="btn" href="release-notes/">All Release Notes</a>`;
   box.hidden = false;
 }
 function showWhatsNew(){ if(NOTES) fillWhatsNew(); else loadNotes().then(fillWhatsNew).catch(() => {}); }
@@ -526,12 +540,50 @@ function showWhatsNew(){ if(NOTES) fillWhatsNew(); else loadNotes().then(fillWha
 function route(){
   $('#suggest').hidden = true;
   const h = location.hash.slice(1); let m;
-  if((m = h.match(/^a-(\d+)-(\d+)$/))) renderArticle(+m[1]-1, +m[2]-1);
-  else if((m = h.match(/^c-(\d+)$/))) renderCat(+m[1]-1);
-  else if(h === 'releases') renderReleases(null);
-  else if((m = h.match(/^rn-(\d{4}-\d{2})$/))) renderReleases(m[1]);
+  const articlePath = location.pathname.match(/\/articles\/([^/]+)\/(?:index\.html)?$/);
+  const topicPath = location.pathname.match(/\/topics\/([^/]+)\/(?:index\.html)?$/);
+  const releasePath = isReleaseRoute();
+  const searchPath = /\/search\/(?:index\.html)?$/.test(location.pathname);
+  if((m = h.match(/^a-(\d+)-(\d+)$/))){
+    const article = articleByNumber(+m[1], +m[2]);
+    if(article) location.replace(new URL(aHref(article), document.baseURI));
+    else location.replace(new URL('./', document.baseURI));
+    return;
+  }
+  if((m = h.match(/^c-(\d+)$/))){
+    const category = CATS[+m[1]-1];
+    location.replace(new URL(category ? cHref(category) : './', document.baseURI));
+    return;
+  }
+  if(h === 'releases'){ location.replace(new URL('release-notes/', document.baseURI)); return; }
+  if(h === 'home'){ location.replace(new URL('./', document.baseURI)); return; }
+  if((m = h.match(/^rn-(\d{4}-\d{2})$/)) && !releasePath){
+    location.replace(new URL(`release-notes/#rn-${m[1]}`, document.baseURI));
+    return;
+  }
+  if(articlePath){
+    const article = FLAT.find(a => a.slug === articlePath[1]);
+    if(article) renderArticle(article.ci, article.ai);
+    else renderHome();
+  }
+  else if(topicPath){
+    const ci = CATS.findIndex(c => c.slug === topicPath[1]);
+    if(ci >= 0) renderCat(ci);
+    else renderHome();
+  }
+  else if(releasePath) renderReleases((m = h.match(/^rn-(\d{4}-\d{2})$/)) ? m[1] : null);
+  else if(searchPath){
+    const q = new URLSearchParams(location.search).get('q') || '';
+    if(q) renderResults(q);
+    else {
+      $('#hero').classList.add('compact');
+      document.title = 'Search | Autometrik Help Center';
+      $('#view').innerHTML = '<div class="crumbs"><a href="./">Help Topics</a><span>›</span><span>Search</span></div><h2 class="sec-title">Search</h2><p class="empty">Enter a word or phrase in the search box above.</p>';
+      $('#side').innerHTML = sideDefault();
+      showWhatsNew();
+    }
+  }
   else renderHome();
-  if(h && h !== 'home' && !h.startsWith('rn-')) window.scrollTo({top:0});
 }
 
 /* live suggestions */
@@ -548,14 +600,17 @@ $('#q').addEventListener('keydown', e => {
   const b = [...$('#suggest').querySelectorAll('button[data-h]')];
   if($('#suggest').hidden || !b.length) return;
   if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); sel = (sel + (e.key==='ArrowDown'?1:-1) + b.length) % b.length; b.forEach((x,i)=>x.classList.toggle('on',i===sel)); }
-  if(e.key==='Enter' && sel>=0){ e.preventDefault(); location.hash = b[sel].dataset.h; }
+  if(e.key==='Enter' && sel>=0){ e.preventDefault(); location.assign(new URL(b[sel].dataset.h, document.baseURI)); }
   if(e.key==='Escape') $('#suggest').hidden = true;
 });
-$('#suggest').addEventListener('click', e => { const b = e.target.closest('button[data-h]'); if(b){ location.hash = b.dataset.h; } });
+$('#suggest').addEventListener('click', e => { const b = e.target.closest('button[data-h]'); if(b){ location.assign(new URL(b.dataset.h, document.baseURI)); } });
 document.addEventListener('click', e => { if(!e.target.closest('.search')) $('#suggest').hidden = true; });
 $('#searchForm').addEventListener('submit', e => {
   e.preventDefault(); const q = $('#q').value.trim(); if(!q) return;
-  $('#suggest').hidden = true; renderResults(q); window.scrollTo({top:0});
+  $('#suggest').hidden = true;
+  const url = new URL('search/', document.baseURI);
+  url.searchParams.set('q', q);
+  location.assign(url);
 });
 window.addEventListener('hashchange', route);
 
